@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter_Tight, Michroma } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 const interTight = Inter_Tight({
@@ -28,6 +29,7 @@ export default function RootLayout({
       <body
         className={`${interTight.variable} ${michroma.variable} antialiased`}
       >
+        <Analytics />
         {children}
       </body>
     </html>
