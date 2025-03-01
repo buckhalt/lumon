@@ -1,4 +1,4 @@
-import { Genre } from "../page";
+import { Genre } from "@/data/music";
 
 const RecordText = ({
   text,

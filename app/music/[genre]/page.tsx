@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { genres } from "../page";
+import { genres } from "@/data/music";
 import Player from "../_components/Player";
 
 export default async function Page({

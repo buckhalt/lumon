@@ -4,11 +4,11 @@ import { Button } from "./Button";
 import { Progress } from "./Progress";
 import { useState, useRef, useEffect } from "react";
 import Record from "./Record";
-import { Genre } from "../page";
+import type { Genre } from "@/data/music";
 
 export default function Player({ genre }: { genre: Genre }) {
   const [playing, setPlaying] = useState(false);
-  const [progress, setProgress] = useState(0); // Track progress as percentage
+  const [progress, setProgress] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   // Initialize the audio element when the component mounts
@@ -24,7 +24,7 @@ export default function Player({ genre }: { genre: Genre }) {
         audioRef.current = null;
       }
     };
-  }, [genre.src]); // This effect runs when the genre changes
+  }, [genre.src]);
 
   // Update progress based on currentTime and duration
   useEffect(() => {
@@ -40,7 +40,6 @@ export default function Player({ genre }: { genre: Genre }) {
 
       audio.addEventListener("timeupdate", updateProgress);
 
-      // Clean up event listener
       return () => {
         audio.removeEventListener("timeupdate", updateProgress);
       };
@@ -64,25 +63,27 @@ export default function Player({ genre }: { genre: Genre }) {
   return (
     <>
       <Record genre={genre} />
-      {playing ? (
-        <Button
-          onClick={() => {
-            pauseSong();
-          }}
-        >
-          PAUSE
-        </Button>
-      ) : (
-        <Button
-          onClick={() => {
-            playSong();
-          }}
-        >
-          BEGIN
-        </Button>
-      )}
+      <div className="flex flex-col gap-2 items-center">
+        {playing ? (
+          <Button
+            onClick={() => {
+              pauseSong();
+            }}
+          >
+            PAUSE
+          </Button>
+        ) : (
+          <Button
+            onClick={() => {
+              playSong();
+            }}
+          >
+            PLAY
+          </Button>
+        )}
 
-      <Progress value={progress} />
+        <Progress value={Math.floor(progress)} />
+      </div>
     </>
   );
 }
