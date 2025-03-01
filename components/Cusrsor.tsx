@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { MousePointer2 } from "lucide-react";
 
-const CustomCursor = ({ color }: { color: string }) => {
+const CustomCursor = ({ color, fill }: { color: string; fill?: string }) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const CustomCursor = ({ color }: { color: string }) => {
         zIndex: 9999,
       }}
     >
-      <MousePointer2 size={32} strokeWidth={3} color={color} />
+      <MousePointer2 size={32} strokeWidth={3} color={color} fill={fill} />
     </div>
   );
 };
