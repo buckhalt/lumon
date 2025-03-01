@@ -1,7 +1,12 @@
 import Link from "next/link";
 
 export const genres = [
-  { number: "01", name: "Bawdy funk", slug: "bawdy-funk" },
+  {
+    number: "01",
+    name: "Bawdy funk",
+    slug: "bawdy-funk",
+    src: "/music/bawdy-funk.mp3",
+  },
   { number: "02", name: "Bouncy swing", slug: "bouncy-swing" },
   { number: "03", name: "Buoyant raggae", slug: "buoyant-raggae" },
   { number: "04", name: "Defiant jazz", slug: "defiant-jazz" },
