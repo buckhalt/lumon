@@ -207,7 +207,7 @@ export default function RecordPlayer({
           <DialogContent>
             <ThumbsDown size={150} />
             <DialogTitle>
-              The Music Experience is Officially Cancelled
+              The music experience is officially cancelled.
             </DialogTitle>
           </DialogContent>
         </Dialog>
