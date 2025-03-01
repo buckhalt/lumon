@@ -34,7 +34,6 @@ export type ConfettiRef = Api | null;
 
 const ConfettiContext = createContext<Api>({} as Api);
 
-// Define component first
 const ConfettiComponent = forwardRef<ConfettiRef, Props>((props, ref) => {
   const {
     options,
@@ -106,10 +105,8 @@ const ConfettiComponent = forwardRef<ConfettiRef, Props>((props, ref) => {
   );
 });
 
-// Set display name immediately
 ConfettiComponent.displayName = "Confetti";
 
-// Export as Confetti
 export const Confetti = ConfettiComponent;
 
 interface ConfettiButtonProps extends ButtonProps {
@@ -121,6 +118,7 @@ interface ConfettiButtonProps extends ButtonProps {
 const ConfettiButtonComponent = ({
   options,
   children,
+  onClick,
   ...props
 }: ConfettiButtonProps) => {
   const handleClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -128,6 +126,7 @@ const ConfettiButtonComponent = ({
       const rect = event.currentTarget.getBoundingClientRect();
       const x = rect.left + rect.width / 2;
       const y = rect.top + rect.height / 2;
+
       await confetti({
         ...options,
         origin: {
@@ -135,8 +134,17 @@ const ConfettiButtonComponent = ({
           y: y / window.innerHeight,
         },
       });
+
+      // execute the original onClick handler if provided
+      if (onClick) {
+        onClick(event);
+      }
     } catch (error) {
       console.error("Confetti button error:", error);
+      // still call the onclick handler if confetti fails
+      if (onClick) {
+        onClick(event);
+      }
     }
   };
 

@@ -6,8 +6,10 @@ import { useState, useRef, useEffect } from "react";
 import Record from "./Record";
 import type { Genre } from "@/data/music";
 import { ConfettiButton } from "./Confetti";
+import { useRouter } from "next/navigation";
 
 export default function Player({ genre }: { genre: Genre }) {
+  const router = useRouter();
   const [playing, setPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -80,6 +82,9 @@ export default function Player({ genre }: { genre: Genre }) {
               colors: ["#fca1a9", "#7dcbdc", "#b3d6c3", "#ecac70"],
               spread: 65,
               particleCount: 100,
+            }}
+            onClick={() => {
+              router.push("/music");
             }}
           >
             FINISH
