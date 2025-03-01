@@ -4,34 +4,68 @@ import { MousePointer2 } from "lucide-react";
 
 const CustomCursor = ({ color, fill }: { color: string; fill?: string }) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Hide the default cursor
-    document.body.style.cursor = "none";
+    // Check if the device is mobile
+    const checkMobile = () => {
+      const userAgent =
+        navigator.userAgent ||
+        navigator.vendor ||
+        (window as unknown as { opera?: string }).opera ||
+        "";
+      const mobileRegex =
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobiles|Opera Mini/i;
 
-    // Apply cursor: none to all elements that might have custom cursors
-    const styleElement = document.createElement("style");
-    styleElement.innerHTML = `
-      * {
-        cursor: none !important;
-      }
-    `;
-    document.head.appendChild(styleElement);
-
-    // Track mouse movement
-    const updateCursorPosition = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
+      setIsMobile(mobileRegex.test(userAgent) || window.innerWidth <= 768);
     };
 
-    window.addEventListener("mousemove", updateCursorPosition);
+    // Initial check
+    checkMobile();
 
-    // Cleanup
-    return () => {
-      document.body.style.cursor = "auto";
-      document.head.removeChild(styleElement);
-      window.removeEventListener("mousemove", updateCursorPosition);
-    };
-  }, []);
+    // Recheck on resize
+    window.addEventListener("resize", checkMobile);
+
+    // Only apply custom cursor if not on mobile
+    if (!isMobile) {
+      // Hide the default cursor
+      document.body.style.cursor = "none";
+
+      // Apply cursor: none to all elements that might have custom cursors
+      const styleElement = document.createElement("style");
+      styleElement.innerHTML = `
+        * {
+          cursor: none !important;
+        }
+      `;
+      document.head.appendChild(styleElement);
+
+      // Track mouse movement
+      const updateCursorPosition = (e: MouseEvent) => {
+        setPosition({ x: e.clientX, y: e.clientY });
+      };
+
+      window.addEventListener("mousemove", updateCursorPosition);
+
+      // Cleanup
+      return () => {
+        document.body.style.cursor = "auto";
+        if (styleElement.parentNode) {
+          document.head.removeChild(styleElement);
+        }
+        window.removeEventListener("mousemove", updateCursorPosition);
+        window.removeEventListener("resize", checkMobile);
+      };
+    } else {
+      // Just cleanup event listener on mobile
+      return () => {
+        window.removeEventListener("resize", checkMobile);
+      };
+    }
+  }, [isMobile]);
+
+  // Don't render anything on mobile
+  if (isMobile) return null;
 
   return (
     <div
