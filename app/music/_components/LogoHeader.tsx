@@ -21,7 +21,7 @@ const Lines = () => {
 
 export default function LogoHeader() {
   return (
-    <div className="pt-6 pb-4 flex flex-col items-center gap-1">
+    <div className="pt-6 lg:pb-4 flex flex-col items-center gap-1">
       <Lines />
       <Link href="/" className="flex flex-col items-center">
         <Image

@@ -92,7 +92,7 @@ export default function RecordPlayer({
   }, [progress]);
 
   return (
-    <div className="relative w-80 h-96 bg-wit rounded-lg shadow-xl p-4">
+    <div className="relative w-80 h-96 bg-wit rounded-lg shadow-xl lg:p-4">
       {/* Record player case */}
       <div className="absolute inset-0 rounded-lg bg-benevolence shadow-md overflow-hidden">
         {/* top part */}

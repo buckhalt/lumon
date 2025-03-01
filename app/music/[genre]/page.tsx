@@ -15,8 +15,8 @@ export default async function Page(props: {
 
   if (!genre) redirect("/music");
   return (
-    <div className="flex flex-col items-center gap-12">
-      <div className="flex flex-col gap-4 items-center uppercase">
+    <div className="flex flex-col items-center gap-4 lg:gap-12">
+      <div className="flex flex-col gap-1 lg:gap-4 items-center uppercase">
         <Link href="/music">
           <h1 className="text-3xl md:text-5xl lg:text-6xl">MUSIC EXPERIENCE</h1>
         </Link>
