@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen p-8 md:p-24 lg:p-48 gap-6 md:gap-12 font-[family-name:var(--font-michroma)]">
+    <div className="flex flex-col items-center justify-center h-screen md:p-24 lg:p-48 gap-6 md:gap-12 font-[family-name:var(--font-michroma)]">
       <div className="w-full max-w-xs md:max-w-md lg:max-w-lg">
         <Image
           src="/lumon-outline-light.svg"
