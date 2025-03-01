@@ -10,7 +10,7 @@ const RecordText = ({
 }) => {
   return (
     <div
-      className={`text-center font-[family-name:var(--font-michroma)] uppercase pt-2 flex flex-col ${className}`}
+      className={`text-center font-[family-name:var(--font-michroma)] uppercase ${className}`}
     >
       <p>{text}</p>
     </div>
@@ -44,13 +44,22 @@ export default function Record({
 
   return (
     <motion.div
-      className="h-75 w-75 rounded-full bg-wit flex flex-col gap-6 items-center justify-center text-cheer"
+      className="relative h-75 w-75 rounded-full bg-wit flex items-center justify-center"
       animate={spinning ? "spinning" : "stopped"}
       variants={recordVariants}
     >
-      <RecordText text={genre.number} className="text-2xl" />
-      <div className="h-20 w-20 rounded-full bg-cheer mb-4" />
-      <RecordText text={genre.name} className="text-xs w-36" />
+      <div className="absolute inset-0 flex flex-col items-center">
+        <RecordText text={genre.number} className="text-2xl text-cheer pt-12" />
+      </div>
+
+      <div className="absolute h-20 w-20 rounded-full bg-cheer" />
+
+      <div className="absolute inset-0 flex flex-col items-center justify-end">
+        <RecordText
+          text={genre.name}
+          className="text-xs text-cheer w-36 mb-12"
+        />
+      </div>
     </motion.div>
   );
 }

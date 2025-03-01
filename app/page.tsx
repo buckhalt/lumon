@@ -11,7 +11,7 @@ export default function Home() {
         height={500}
       />
       <Link href="/music" className="text-2xl hover:underline decoration-3">
-        Music
+        Music Experience
       </Link>
     </div>
   );
