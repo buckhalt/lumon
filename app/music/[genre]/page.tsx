@@ -3,13 +3,14 @@ import { genres } from "@/data/music";
 import MusicExperience from "../_components/MusicExperience";
 import Link from "next/link";
 
-export default async function Page({
-  params,
-}: {
-  params: {
-    genre: string;
-  };
-}) {
+export default async function Page(
+  props: {
+    params: Promise<{
+      genre: string;
+    }>;
+  }
+) {
+  const params = await props.params;
   const genreSlug = await params.genre;
 
   const genre = genres.find((genre) => genre.slug === genreSlug);
