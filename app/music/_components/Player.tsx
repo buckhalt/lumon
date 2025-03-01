@@ -5,6 +5,7 @@ import { Progress } from "./Progress";
 import { useState, useRef, useEffect } from "react";
 import Record from "./Record";
 import type { Genre } from "@/data/music";
+import { ConfettiButton } from "./Confetti";
 
 export default function Player({ genre }: { genre: Genre }) {
   const [playing, setPlaying] = useState(false);
@@ -64,7 +65,7 @@ export default function Player({ genre }: { genre: Genre }) {
     <>
       <Record genre={genre} spinning={playing} />
       <div className="flex flex-col gap-2 items-center">
-        {playing ? (
+        {playing && progress < 100 && (
           <Button
             onClick={() => {
               pauseSong();
@@ -72,7 +73,19 @@ export default function Player({ genre }: { genre: Genre }) {
           >
             PAUSE
           </Button>
-        ) : (
+        )}
+        {playing && progress === 100 && (
+          <ConfettiButton
+            options={{
+              colors: ["#fca1a9", "#7dcbdc", "#b3d6c3", "#ecac70"],
+              spread: 65,
+              particleCount: 100,
+            }}
+          >
+            FINISH
+          </ConfettiButton>
+        )}
+        {!playing && (
           <Button
             onClick={() => {
               playSong();
