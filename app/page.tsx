@@ -1,9 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
+import CustomCursor from "@/components/Cusrsor";
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen md:p-24 lg:p-48 gap-6 md:gap-12 font-[family-name:var(--font-michroma)]">
+    <div className="noscroll flex flex-col items-center justify-center h-screen md:p-24 lg:p-48 gap-6 md:gap-12 font-[family-name:var(--font-michroma)]">
       <div className="w-full max-w-xs md:max-w-md lg:max-w-lg">
         <Image
           src="/lumon-outline-light.svg"
@@ -19,6 +20,7 @@ export default function Home() {
       >
         Music Experience
       </Link>
+      <CustomCursor color="#FFFFFF" />
     </div>
   );
 }

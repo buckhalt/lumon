@@ -1,3 +1,4 @@
+import CustomCursor from "@/components/Cusrsor";
 import LogoHeader from "./_components/LogoHeader";
 
 export default function MusicLayout({
@@ -8,6 +9,7 @@ export default function MusicLayout({
   return (
     <div className="items-center justify-items-center min-h-screen flex flex-col gap-12 pb-12 font-semibold bg-cheer text-wit">
       <LogoHeader />
+      <CustomCursor color="#0F172A" />
 
       {children}
     </div>
