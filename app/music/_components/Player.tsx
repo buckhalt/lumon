@@ -63,9 +63,15 @@ export default function Player({ genre }: { genre: Genre }) {
     }
   };
 
+  useEffect(() => {
+    if (progress >= 100) {
+      setPlaying(false);
+    }
+  }, [progress]);
+
   return (
     <>
-      <Record genre={genre} spinning={playing} />
+      <Record genre={genre} playing={playing} />
       <div className="flex flex-col gap-2 items-center">
         {playing && progress < 100 && (
           <Button
@@ -76,7 +82,7 @@ export default function Player({ genre }: { genre: Genre }) {
             PAUSE
           </Button>
         )}
-        {playing && progress === 100 && (
+        {progress === 100 && (
           <ConfettiButton
             options={{
               colors: ["#fca1a9", "#7dcbdc", "#b3d6c3", "#ecac70"],
@@ -90,7 +96,7 @@ export default function Player({ genre }: { genre: Genre }) {
             FINISH
           </ConfettiButton>
         )}
-        {!playing && (
+        {!playing && progress < 100 && (
           <Button
             onClick={() => {
               playSong();
