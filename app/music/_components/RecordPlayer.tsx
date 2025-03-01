@@ -4,6 +4,14 @@ import { Genre } from "@/data/music";
 import Image from "next/image";
 import { cn } from "@/utils/cn";
 import { useState, useRef, useEffect } from "react";
+import { useRouter } from "next/navigation"; // Import the router
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/Dialog";
+import { ThumbsDown } from "lucide-react";
 
 export default function RecordPlayer({
   genre,
@@ -16,6 +24,8 @@ export default function RecordPlayer({
 }) {
   const [playing, setPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false); // New state to manage the dialog visibility
+  const router = useRouter(); // Use the router for redirect
 
   // Initialize the audio element when the component mounts
   useEffect(() => {
@@ -61,11 +71,17 @@ export default function RecordPlayer({
 
   const toggleRecordPlayer = () => {
     if (!playing) {
+      // Play the song
       playSong();
     } else {
+      // Turn off the record player, open the dialog, and wait 2 seconds to redirect
       setPlaying(false);
       audioRef.current?.pause();
-      alert("MUSIC EXPERIENCE IS OFFICIALLY CANCELLED");
+      setIsDialogOpen(true);
+
+      setTimeout(() => {
+        router.push("/music");
+      }, 2000); //
     }
   };
 
@@ -184,6 +200,17 @@ export default function RecordPlayer({
           <div className="absolute bottom-1 left-1 w-1 h-1 bg-gray-600 rounded-full"></div>
           <div className="absolute bottom-1 right-1 w-1 h-1 bg-gray-600 rounded-full"></div>
         </div>
+
+        {/* Dialog triggered when turning off */}
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+          <DialogTrigger />
+          <DialogContent>
+            <ThumbsDown size={150} />
+            <DialogTitle>
+              The Music Experience is Officially Cancelled
+            </DialogTitle>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );
