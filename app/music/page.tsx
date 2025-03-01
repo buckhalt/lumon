@@ -6,7 +6,7 @@ export default function Music() {
     <div className="flex flex-col gap-2 items-center uppercase font-bold">
       <div className="flex flex-col gap-4 items-center">
         <h1 className="text-6xl">MUSIC EXPERIENCE</h1>
-        <h1 className="text-2xl font-medium">(CHOOSE ONE)</h1>
+        <h1 className="text-2xl font-medium pb-8">(CHOOSE ONE)</h1>
       </div>
       {genres.map((genre) => (
         <Link

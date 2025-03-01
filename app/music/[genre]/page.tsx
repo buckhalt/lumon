@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { genres } from "@/data/music";
-import Player from "../_components/Player";
+import MusicExperience from "../_components/MusicExperience";
 import Link from "next/link";
 
 export default async function Page({
@@ -24,7 +24,7 @@ export default async function Page({
         <h1 className="text-2xl font-medium uppercase">{genre.name}</h1>
       </div>
 
-      <Player genre={genre} />
+      <MusicExperience genre={genre} />
     </div>
   );
 }
