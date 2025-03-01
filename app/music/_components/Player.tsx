@@ -62,7 +62,7 @@ export default function Player({ genre }: { genre: Genre }) {
 
   return (
     <>
-      <Record genre={genre} />
+      <Record genre={genre} spinning={playing} />
       <div className="flex flex-col gap-2 items-center">
         {playing ? (
           <Button
